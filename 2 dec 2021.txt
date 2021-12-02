@@ -1,0 +1,169 @@
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.ListIterator;
+import java.util.Scanner;
+
+class Student {
+
+
+
+    static Scanner scan = new Scanner(System.in);
+    static HashSet<StuModel> hashSet = new HashSet<StuModel>();
+    public static void main(String[] args) {
+        int ch;
+        do {
+
+
+
+            System.out.println("menu");
+            System.out.println("1.create");
+            System.out.println("2.display");
+            System.out.println("3.serach");
+            System.out.println("4.delete");
+            System.out.println("5.update");
+            System.out.println("enter ur option");
+            ch = scan.nextInt();
+            switch (ch) {
+                case 1:
+                    System.out.println("enter serailno");
+                    int SrNo = scan.nextInt();
+                    System.out.println(" enter product name");
+                    String Productname = scan.next();
+                    System.out.println(" enter qty");
+                    int qty = scan.nextInt();
+                    System.out.println("enter price");
+                    int price = scan.nextInt();
+                    hashSet.add(new StuModel(SrNo, Productname, qty, price));
+                    break;
+                case 2:
+                    System.out.println("...");
+                    Iterator<StuModel> i=hashSet.iterator();
+                    while (i.hasNext()){
+                        StuModel e=i.next();
+                        System.out.println(e);
+                    }
+                    break;
+                case 3:
+                    boolean found=false;
+                    System.out.println("enter the product name");
+                    Productname=scan.next();
+                    i=hashSet.iterator();
+                    while (i.hasNext()){
+                        StuModel e=i.next();
+                        if (e.getProductname()==Productname) {
+                            System.out.println(e);
+                            found=true;
+                        }
+                    }
+                    if (!found){
+                        System.out.println("not found");
+                    }
+                    break;
+                case 4:
+                    found=false;
+                    System.out.println("enter product name to delete");
+                    Productname=scan.next();
+                    i=hashSet.iterator();
+                    while (i.hasNext()){
+                        StuModel e=i.next();
+                        if (e.getProductname()==Productname){
+                            i.remove();
+                            System.out.println(e);
+                            found=true;
+                        }
+                    }
+                    if (!found){
+                        System.out.println("not found");
+                    }else {
+                        System.out.println("deleted");
+                    }
+                    break;
+                case 5: found=false;
+                    System.out.println(" enter product name to update to update");
+                    Productname=scan.next();
+                    ListIterator<StuModel> li= (ListIterator<StuModel>) hashSet.iterator();
+                    while (li.hasNext()){
+                        StuModel e=li.next();
+                        if (e.getProductname()==Productname){
+                            System.out.println("enter new price");
+                            price=scan.nextInt();
+
+                            li.set(new StuModel(Productname,price));
+                            System.out.println(e);
+                            found=true;
+                        }
+                    }
+                    if (!found){
+                        System.out.println("not found");
+                    }else {
+                        System.out.println("deleted");
+                    }
+                    break;
+            }
+        }
+        while (ch != -1) ;
+        System.out.println("program endes");
+    }
+}
+----------------------------------------
+public class StuModel {
+    private int SrNo;
+    private String Productname;
+    private int qty;
+    private int price;
+    public StuModel(int srNo, String productname, int qty, int price) {
+        SrNo = srNo;
+        Productname = productname;
+        this.qty = qty;
+        this.price = price;
+    }
+
+    public StuModel(String productname, int price) {
+    }
+
+    @Override
+    public String toString() {
+        return "StuModel{" +
+                "SrNo=" + SrNo +
+                ", Productname='" + Productname + '\'' +
+                ", qty=" + qty +
+                ", price=" + price +
+                '}';
+    }
+
+    
+
+    public int getSrNo() {
+        return SrNo;
+    }
+
+    public void setSrNo(int srNo) {
+        SrNo = srNo;
+    }
+
+    public String getProductname() {
+        return Productname;
+    }
+
+    public void setProductname(String productname) {
+        Productname = productname;
+    }
+
+    public int getQty() {
+        return qty;
+    }
+
+    public void setQty(int qty) {
+        this.qty = qty;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    
+}
